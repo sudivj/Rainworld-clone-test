@@ -9,6 +9,8 @@ struct Node
     float pos_x, pos_y;
     int room_pos_x, room_pos_y;
 
+    float direction_to_target;
+
     SDL_Rect rect;
     SDL_Color color;
 

@@ -25,3 +25,13 @@ float degToRad(float degrees)
 {
     return (float)(degrees * (PI / 180));
 }
+
+float getDirection(float start_x, float start_y, float end_x, float end_y)
+{
+    return atan2(end_y - start_y, end_x - start_x);
+}
+
+float getDirection(Node *start_node, Node *end_node)
+{
+    return atan2(end_node->pos_y - start_node->pos_y, end_node->pos_x - start_node->pos_x);
+}

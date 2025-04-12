@@ -34,11 +34,21 @@ bool game(SDL_Renderer *renderer, int w, int h)
 
         Room_draw(renderer, &r);
 
-        Node_updatePos(&n, (float)mouseX, (float)mouseY);
+        // Node_updatePos(&n, (float)mouseX, (float)mouseY);
         Node_printData(renderer, &n);
+
 
         renderText(renderer, 10, 10, mouseXChar.c_str(), COLOR_WHITE);
         renderText(renderer, 10, 20, mouseYChar.c_str(), COLOR_WHITE);
+
+        float dir_value = getDirection(n.pos_x, n.pos_y, mouseX, mouseY);
+        std::string dir = std::to_string(dir_value);
+        renderText(renderer, 10, 40, dir.c_str(), COLOR_WHITE);
+
+        SDL_SetRenderDrawColor(renderer, COLOR_ORANGE.r, COLOR_ORANGE.g, COLOR_ORANGE.b, COLOR_ORANGE.a);
+        int dir_x = n.pos_x + (20 * cos(dir_value));
+        int dir_y = n.pos_y + (20 * sin(dir_value));
+        SDL_RenderDrawLine(renderer, n.pos_x, n.pos_y, dir_x, dir_y);
 
         SDL_SetRenderDrawColor(renderer, n.color.r, n.color.g, n.color.b, n.color.a);
         SDL_RenderFillRect(renderer, &n.rect);
