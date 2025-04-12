@@ -2,10 +2,12 @@
 
 #include <SDL2/SDL.h>
 #include "colors.hpp"
+#include "utils.hpp"
 
 struct Node
 {
     float pos_x, pos_y;
+    int room_pos_x, room_pos_y;
 
     SDL_Rect rect;
     SDL_Color color;
@@ -41,3 +43,4 @@ struct Node
 typedef struct Node node;
 
 void Node_updatePos(Node *node, float x, float y);
+void Node_printData(SDL_Renderer *renderer, Node *node);

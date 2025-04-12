@@ -3,6 +3,9 @@
 int mouseX, mouseY;
 std::string mouseXChar, mouseYChar;
 
+int tileWidth = 20;
+int tileHeight = 20;
+
 void renderText(SDL_Renderer *renderer, int x, int y, const char *s, SDL_Color textColor)
 {
     stringRGBA(renderer, x, y, s, textColor.r, textColor.g, textColor.b, textColor.a);

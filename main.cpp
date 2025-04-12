@@ -6,9 +6,6 @@
 
 #include "include/game.hpp"
 
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
-
 int main(int argc, char *argv[])
 {
     if (SDL_Init(SDL_INIT_VIDEO) < 0)

@@ -8,6 +8,9 @@ bool game(SDL_Renderer *renderer, int w, int h)
 
     std::cout << mouseX << " : " << mouseY << std::endl;
 
+    Room r;
+    Room_intialize(&r, 1, SCREEN_WIDTH / tileWidth, SCREEN_HEIGHT / tileHeight);
+
     Node n(10.0f, 10.0f, 10, 10);
     Node_updatePos(&n, 50.0f, 50.0f);
 
@@ -29,7 +32,10 @@ bool game(SDL_Renderer *renderer, int w, int h)
 
         setBackGroundColor(renderer, COLOR_BLACK);
 
+        Room_draw(renderer, &r);
+
         Node_updatePos(&n, (float)mouseX, (float)mouseY);
+        Node_printData(renderer, &n);
 
         renderText(renderer, 10, 10, mouseXChar.c_str(), COLOR_WHITE);
         renderText(renderer, 10, 20, mouseYChar.c_str(), COLOR_WHITE);
