@@ -23,3 +23,65 @@ void getMouseData()
     mouseXChar = std::to_string(mouseX);
     mouseYChar = std::to_string(mouseY);
 }
+
+void setPixel(SDL_Renderer *renderer ,int x, int y, SDL_Color c)
+{
+    SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
+    SDL_RenderDrawPoint(renderer, x, y);
+}
+
+
+// Draw or fill a circle
+// Note: Below code is taken from https://medium.com/@trey.tomes/bresenhams-circle-algorithm-2153b32a0ecf
+
+void drawOctants(SDL_Renderer *r, Circle *cir, int o_x, int o_y)
+{
+    setPixel(r, cir->x + o_x, cir->y + o_y, cir->c);
+    setPixel(r, cir->x - o_x, cir->y + o_y, cir->c);
+    setPixel(r, cir->x + o_x, cir->y - o_y, cir->c);
+    setPixel(r, cir->x - o_x, cir->y - o_y, cir->c);
+
+    setPixel(r, cir->x + o_y, cir->y + o_x, cir->c);
+    setPixel(r, cir->x - o_y, cir->y + o_x, cir->c);
+    setPixel(r, cir->x + o_y, cir->y - o_x, cir->c);
+    setPixel(r, cir->x - o_y, cir->y - o_x, cir->c);
+}
+
+void fillOctants(SDL_Renderer *r, Circle *cir, int o_x, int o_y)
+{
+    SDL_SetRenderDrawColor(r, cir->c.r, cir->c.g, cir->c.b, cir->c.a);
+    SDL_RenderDrawLine(r, cir->x, cir->y, cir->x + o_x, cir->y + o_y);
+    SDL_RenderDrawLine(r, cir->x, cir->y, cir->x - o_x, cir->y + o_y);
+    SDL_RenderDrawLine(r, cir->x, cir->y, cir->x + o_x, cir->y - o_y);
+    SDL_RenderDrawLine(r, cir->x, cir->y, cir->x - o_x, cir->y - o_y);
+
+    SDL_RenderDrawLine(r, cir->x, cir->y, cir->x + o_y, cir->y + o_x);
+    SDL_RenderDrawLine(r, cir->x, cir->y, cir->x - o_y, cir->y + o_x);
+    SDL_RenderDrawLine(r, cir->x, cir->y, cir->x + o_y, cir->y - o_x);
+    SDL_RenderDrawLine(r, cir->x, cir->y, cir->x - o_y, cir->y - o_x);
+}
+
+void Circle_draw(SDL_Renderer *renderer, Circle *circle)
+{
+    int o_x = 0, o_y = circle->radius;
+    int d = 3 - 2 * circle->radius;
+
+    !circle->filled ? drawOctants(renderer, circle, o_x, o_y) : fillOctants(renderer, circle, o_x, o_y);
+
+    while (o_y >= o_x)
+    {
+        o_x++;
+
+        if(d > 0)
+        {
+            o_y--;
+            d = d + 4 * (o_x - o_y) + 10;
+        }
+        else
+        {
+            d = d + 4 * o_x + 6;
+        }
+
+        !circle->filled ? drawOctants(renderer, circle, o_x, o_y) : fillOctants(renderer, circle, o_x, o_y);
+    }
+}

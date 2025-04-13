@@ -14,6 +14,8 @@ bool game(SDL_Renderer *renderer, int w, int h)
     Node n(10.0f, 10.0f, 10, 10);
     Node_updatePos(&n, 50.0f, 50.0f);
 
+    Circle cir = {.x = 100, .y = 100, .radius = 20, .c = COLOR_ORANGE};
+
     //Game Loop
     while (!quit)
     {
@@ -44,6 +46,8 @@ bool game(SDL_Renderer *renderer, int w, int h)
         float dir_value = getDirection(n.pos_x, n.pos_y, mouseX, mouseY);
         std::string dir = std::to_string(dir_value);
         renderText(renderer, 10, 40, dir.c_str(), COLOR_WHITE);
+        std::string dist = std::to_string(getDistance(n.pos_x, n.pos_y, mouseX, mouseY));
+        renderText(renderer, 10, 50, dist.c_str(), COLOR_WHITE);
 
         SDL_SetRenderDrawColor(renderer, COLOR_ORANGE.r, COLOR_ORANGE.g, COLOR_ORANGE.b, COLOR_ORANGE.a);
         int dir_x = n.pos_x + (20 * cos(dir_value));
@@ -52,6 +56,10 @@ bool game(SDL_Renderer *renderer, int w, int h)
 
         SDL_SetRenderDrawColor(renderer, n.color.r, n.color.g, n.color.b, n.color.a);
         SDL_RenderFillRect(renderer, &n.rect);
+
+        cir.x = mouseX; 
+        cir.y = mouseY;
+        Circle_draw(renderer, &cir);
 
         SDL_RenderPresent(renderer);
     }

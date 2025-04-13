@@ -17,3 +17,16 @@ extern int tileHeight;
 void renderText(SDL_Renderer *renderer, int x, int y, const char *s, SDL_Color textColor);
 void setBackGroundColor(SDL_Renderer *renderer, SDL_Color color);
 void getMouseData();
+
+struct Circle
+{
+    int x, y;
+    int radius;
+    bool filled = false;
+    SDL_Color c;
+};
+typedef struct Circle Circle;
+
+void setPixel(SDL_Renderer *renderer ,int x, int y, SDL_Color c);
+
+void Circle_draw(SDL_Renderer *renderer, Circle *circle);
