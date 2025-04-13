@@ -49,16 +49,11 @@ void drawOctants(SDL_Renderer *r, Circle *cir, int o_x, int o_y)
 
 void fillOctants(SDL_Renderer *r, Circle *cir, int o_x, int o_y)
 {
-    SDL_SetRenderDrawColor(r, cir->c.r, cir->c.g, cir->c.b, cir->c.a);
-    SDL_RenderDrawLine(r, cir->x, cir->y, cir->x + o_x, cir->y + o_y);
-    SDL_RenderDrawLine(r, cir->x, cir->y, cir->x - o_x, cir->y + o_y);
-    SDL_RenderDrawLine(r, cir->x, cir->y, cir->x + o_x, cir->y - o_y);
-    SDL_RenderDrawLine(r, cir->x, cir->y, cir->x - o_x, cir->y - o_y);
+    for (int i = cir->x - o_x; i < cir->x + o_x; i++) setPixel(r, i, cir->y + o_y, cir->c);
+    for (int i = cir->x - o_x; i < cir->x + o_x; i++) setPixel(r, i, cir->y - o_y, cir->c);
 
-    SDL_RenderDrawLine(r, cir->x, cir->y, cir->x + o_y, cir->y + o_x);
-    SDL_RenderDrawLine(r, cir->x, cir->y, cir->x - o_y, cir->y + o_x);
-    SDL_RenderDrawLine(r, cir->x, cir->y, cir->x + o_y, cir->y - o_x);
-    SDL_RenderDrawLine(r, cir->x, cir->y, cir->x - o_y, cir->y - o_x);
+    for (int i = cir->x - o_y; i < cir->x + o_y; i++) setPixel(r, i, cir->y + o_x, cir->c);
+    for (int i = cir->x - o_y; i < cir->x + o_y; i++) setPixel(r, i, cir->y - o_x, cir->c);
 }
 
 void Circle_draw(SDL_Renderer *renderer, Circle *circle)

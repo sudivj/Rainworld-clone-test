@@ -14,7 +14,7 @@ bool game(SDL_Renderer *renderer, int w, int h)
     Node n(10.0f, 10.0f, 10, 10);
     Node_updatePos(&n, 50.0f, 50.0f);
 
-    Circle cir = {.x = 100, .y = 100, .radius = 20, .c = COLOR_ORANGE};
+    Circle cir = {.x = 100, .y = 100, .radius = 100, .filled=true, .c = COLOR_ORANGE};
 
     //Game Loop
     while (!quit)
