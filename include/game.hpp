@@ -6,5 +6,6 @@
 #include "utils.hpp"
 #include "node.hpp"
 #include "room/room.hpp"
+#include "body/bodypart.hpp"
 
 bool game(SDL_Renderer *renderer, int w, int h);

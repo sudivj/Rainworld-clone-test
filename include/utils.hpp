@@ -30,3 +30,5 @@ typedef struct Circle Circle;
 void setPixel(SDL_Renderer *renderer ,int x, int y, SDL_Color c);
 
 void Circle_draw(SDL_Renderer *renderer, Circle *circle);
+
+int getFPS();

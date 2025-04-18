@@ -36,15 +36,15 @@ void setPixel(SDL_Renderer *renderer ,int x, int y, SDL_Color c)
 
 void drawOctants(SDL_Renderer *r, Circle *cir, int o_x, int o_y)
 {
-    setPixel(r, cir->x + o_x, cir->y + o_y, cir->c);
-    setPixel(r, cir->x - o_x, cir->y + o_y, cir->c);
-    setPixel(r, cir->x + o_x, cir->y - o_y, cir->c);
-    setPixel(r, cir->x - o_x, cir->y - o_y, cir->c);
+    setPixel(r, cir->x + o_x    , cir->y + o_y, cir->c);
+    setPixel(r, cir->x - o_x - 1, cir->y + o_y, cir->c);
+    setPixel(r, cir->x + o_x    , cir->y - o_y - 1, cir->c);
+    setPixel(r, cir->x - o_x - 1, cir->y - o_y - 1, cir->c);
 
-    setPixel(r, cir->x + o_y, cir->y + o_x, cir->c);
-    setPixel(r, cir->x - o_y, cir->y + o_x, cir->c);
-    setPixel(r, cir->x + o_y, cir->y - o_x, cir->c);
-    setPixel(r, cir->x - o_y, cir->y - o_x, cir->c);
+    setPixel(r, cir->x + o_y    , cir->y + o_x, cir->c);
+    setPixel(r, cir->x - o_y - 1, cir->y + o_x, cir->c);
+    setPixel(r, cir->x + o_y    , cir->y - o_x - 1, cir->c);
+    setPixel(r, cir->x - o_y - 1, cir->y - o_x - 1, cir->c);
 }
 
 void fillOctants(SDL_Renderer *r, Circle *cir, int o_x, int o_y)
@@ -79,4 +79,11 @@ void Circle_draw(SDL_Renderer *renderer, Circle *circle)
 
         !circle->filled ? drawOctants(renderer, circle, o_x, o_y) : fillOctants(renderer, circle, o_x, o_y);
     }
+}
+
+int getFPS()
+{
+    auto fps_value = SDL_GetTicks();
+    std::string fps = "ticks: " + std::to_string(fps_value);
+    SDL_Log(fps.c_str());
 }
