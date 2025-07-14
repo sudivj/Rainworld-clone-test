@@ -61,14 +61,10 @@ void Snake::update(int x, int y)
 
 void Snake::draw(SDL_Renderer *r)
 {
-    for (int b = 0; b < body.size(); b++)
-    {
-        BodyPart_draw(r, body[b]);
-    }
-    for (int b = 0; b < body_vertices.size(); b++)
-    {
-        setPixel(r, body_vertices[b].first, body_vertices[b].second, COLOR_RED);
-    }
+    // for (int b = 0; b < body.size(); b++)
+    // {
+    //     BodyPart_draw(r, body[b]);
+    // }
     for (int v = 0; v < smooth_body_vertices.size(); v++)
     {
         // setPixel(r, smooth_body_vertices[v].first, smooth_body_vertices[v].second, COLOR_RED);

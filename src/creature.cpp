@@ -58,7 +58,7 @@ void Creature::setVertices()
     point_y = body.back()->pos_y + (body.back()->circle.radius * sin(angle));
     body_vertices.at(number_of_veritces / 2) = {point_x, point_y};
 
-    int sm_fac = 200;
+    int sm_fac = 50;
 
     smooth_body_vertices.erase(smooth_body_vertices.begin(), smooth_body_vertices.end());
     for (int i = 0; i < body_vertices.size() / 2; i++)

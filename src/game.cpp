@@ -37,12 +37,15 @@ bool game(SDL_Renderer *renderer, int w, int h)
             }
         }
 
+        float fps = getFPS();
+
         setBackGroundColor(renderer, COLOR_BLACK);
 
         // Room_draw(renderer, &r);
 
         renderText(renderer, 10, 10, mouseXChar.c_str(), COLOR_WHITE);
         renderText(renderer, 10, 20, mouseYChar.c_str(), COLOR_WHITE);
+        renderText(renderer, 10, 30, std::to_string(fps).c_str(), COLOR_WHITE);
 
         // BodyPart_setTarget(&b, mouseX, mouseY);
         // BodyPart_drawTarget(renderer, &b);

@@ -6,6 +6,8 @@ std::string mouseXChar, mouseYChar;
 int tileWidth = 20;
 int tileHeight = 20;
 
+int oldtime = 0, newtime = 0;
+
 void renderText(SDL_Renderer *renderer, int x, int y, const char *s, SDL_Color textColor)
 {
     stringRGBA(renderer, x, y, s, textColor.r, textColor.g, textColor.b, textColor.a);
@@ -81,9 +83,12 @@ void Circle_draw(SDL_Renderer *renderer, Circle *circle)
     }
 }
 
-int getFPS()
+float getFPS()
 {
-    auto fps_value = SDL_GetTicks();
-    std::string fps = "ticks: " + std::to_string(fps_value);
-    SDL_Log(fps.c_str());
+    oldtime = newtime;
+    newtime = SDL_GetTicks();
+    float fps_val = 1.f/((float)(newtime - oldtime) / 1000.f);
+    std::string fps = "fps: " + std::to_string(fps_val);
+    // SDL_Log(fps.c_str());
+    return fps_val;
 }
