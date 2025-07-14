@@ -8,6 +8,8 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
+typedef std::pair<int, int> point;
+
 extern int mouseX, mouseY;
 extern std::string mouseXChar, mouseYChar;
 

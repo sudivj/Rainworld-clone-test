@@ -1,3 +1,8 @@
-build/
+#Test Folders
+.test
 
-errors
+#Obj files
+*.o
+
+#Executables
+GAME

@@ -2,6 +2,8 @@
 
 void Snake::initializeSnake()
 {
+    body_connection_length = 20;
+    body_size_config = {15, 15, 10, 10, 7, 7, 7, 5, 5, 5, 5, 5, 5};
     creatureName = "Snake";
 
     body.push_back(new BodyPart(body_size_config[0], BodyPartType::HEAD));
@@ -33,6 +35,7 @@ void Snake::initializeSnake()
     }
 
     calculateVertices();
+    body_vertices.resize(number_of_veritces + 1);
 }
 
 void Snake::update(int x, int y)
@@ -53,80 +56,30 @@ void Snake::update(int x, int y)
 
         BodyPart_updatePos(body[b], new_x, new_y);
     }
-
     setVertices();
 }
 
 void Snake::draw(SDL_Renderer *r)
 {
-    // for (int b = 0; b < body.size(); b++)
-    // {
-    //     BodyPart_draw(r, body[b]);
-    // }
-    for (int v = 0; v < body_vertices.size(); v++)
+    for (int b = 0; b < body.size(); b++)
     {
-        setPixel(r, body_vertices[v].first, body_vertices[v].second, COLOR_RED);
+        BodyPart_draw(r, body[b]);
+    }
+    for (int b = 0; b < body_vertices.size(); b++)
+    {
+        setPixel(r, body_vertices[b].first, body_vertices[b].second, COLOR_RED);
+    }
+    for (int v = 0; v < smooth_body_vertices.size(); v++)
+    {
+        // setPixel(r, smooth_body_vertices[v].first, smooth_body_vertices[v].second, COLOR_RED);
         if (v > 0)
         {
             SDL_SetRenderDrawColor(r, COLOR_ORANGE.r, COLOR_ORANGE.g, COLOR_ORANGE.b, COLOR_ORANGE.a);
-            // SDL_RenderDrawLine(r, body_vertices[v - 1].first, body_vertices[v - 1].second, body_vertices[v].first, body_vertices[v].second);
+            SDL_RenderDrawLine(r, smooth_body_vertices[v - 1].first, smooth_body_vertices[v - 1].second, smooth_body_vertices[v].first, smooth_body_vertices[v].second);
         }
     }
 }
 
 void Snake::printData()
 {
-}
-
-void Snake::calculateVertices()
-{
-    number_of_veritces = (body.size() * 2) + 2;
-}
-
-void Snake::setVertices()
-{
-    calculateVertices();
-    body_vertices.erase(body_vertices.begin(), body_vertices.end());
-    int point_x, point_y;
-    float angle = getDirection(body[0], body[1]) + degToRad(180);
-    point_x = body[0]->pos_x + (body[0]->circle.radius * cos(angle));
-    point_y = body[0]->pos_y + (body[0]->circle.radius * sin(angle));
-    body_vertices.push_back({point_x, point_y});
-    for (int v = 0; v < (number_of_veritces / 2) - 1; v++)
-    {
-        if (v > 0)
-        {
-            angle = getDirection(body[v - 1], body[v]) + degToRad(90);
-        }
-        else
-        {
-            angle = angle - degToRad(90);
-        }
-        point_x = body[v]->pos_x + (body[v]->circle.radius * cos(angle));
-        point_y = body[v]->pos_y + (body[v]->circle.radius * sin(angle));
-        body_vertices.push_back({point_x, point_y});
-    }
-    angle = angle - degToRad(90);
-    point_x = body.back()->pos_x + (body.back()->circle.radius * cos(angle));
-    point_y = body.back()->pos_y + (body.back()->circle.radius * sin(angle));
-    body_vertices.push_back({point_x, point_y});
-    int size = body.size() - 1;
-    for (int v = 0; v < (number_of_veritces / 2) - 1; v++)
-    {
-        if (v > 0)
-        {
-            angle = getDirection(body[size - (v - 1)], body[size - v]) + degToRad(90);
-        }
-        else
-        {
-            angle = angle - degToRad(90);
-        }
-        point_x = body[size - v]->pos_x + (body[size - v]->circle.radius * cos(angle));
-        point_y = body[size - v]->pos_y + (body[size - v]->circle.radius * sin(angle));
-        body_vertices.push_back({point_x, point_y});
-    }
-    angle = getDirection(body[0], body[1]) + degToRad(180);
-    point_x = body[0]->pos_x + (body[0]->circle.radius * cos(angle));
-    point_y = body[0]->pos_y + (body[0]->circle.radius * sin(angle));
-    body_vertices.push_back({point_x, point_y});
 }

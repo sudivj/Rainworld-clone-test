@@ -14,12 +14,12 @@ bool game(SDL_Renderer *renderer, int w, int h)
     Snake s;
     s.initializeSnake();
 
-    Node n1(100, 100, 10, 10);
-    Node n2(100, 100, 10, 10);
-    Node n3(100, 100, 10, 10);
-    Node n4(100, 100, 10, 10);
-    Node n5(100, 100, 10, 10);
-    Node n6(100, 100, 10, 10);
+    // Node n1(100, 100, 10, 10);
+    // Node n2(100, 100, 10, 10);
+    // Node n3(100, 100, 10, 10);
+    // Node n4(100, 100, 10, 10);
+    // Node n5(100, 100, 10, 10);
+    // Node n6(100, 100, 10, 10);
 
     // Game Loop
     while (!quit)
