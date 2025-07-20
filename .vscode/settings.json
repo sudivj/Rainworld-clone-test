@@ -62,6 +62,20 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "bitset": "cpp",
+        "codecvt": "cpp",
+        "forward_list": "cpp",
+        "set": "cpp",
+        "unordered_set": "cpp",
+        "fstream": "cpp",
+        "queue": "cpp",
+        "ranges": "cpp",
+        "condition_variable": "cpp",
+        "csignal": "cpp",
+        "regex": "cpp",
+        "mutex": "cpp",
+        "stack": "cpp",
+        "valarray": "cpp"
     }
 }

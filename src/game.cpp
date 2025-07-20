@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "../include/game.hpp"
-#include "../include/creatures/snake.hpp"
+#include "../include/creature.hpp"
 
 bool game(SDL_Renderer *renderer, int w, int h)
 {
@@ -11,8 +11,11 @@ bool game(SDL_Renderer *renderer, int w, int h)
     Room_intialize(&r, 1, SCREEN_WIDTH / tileWidth, SCREEN_HEIGHT / tileHeight);
 
     // BodyPart b(20, BodyPartType::HEAD);
-    Snake s;
-    s.initializeSnake();
+    // Snake s;
+    // s.initializeSnake();
+
+    Creature c("include/creatures/data.yml");
+    c.initializeCreature();
 
     // Node n1(100, 100, 10, 10);
     // Node n2(100, 100, 10, 10);
@@ -56,8 +59,10 @@ bool game(SDL_Renderer *renderer, int w, int h)
         // std::string consoleOutput = "m_x: " + mouseXChar + " m_y: " + mouseYChar;
         // SDL_Log(consoleOutput.c_str());
 
-        s.update(mouseX, mouseY);
-        s.draw(renderer);
+        // s.update(mouseX, mouseY);
+        // s.draw(renderer);
+        c.updateCreature(mouseX, mouseY);
+        c.draw(renderer);
 
         // SDL_SetRenderDrawColor(renderer, COLOR_WHITE.r, COLOR_WHITE.g, COLOR_WHITE.b, COLOR_WHITE.a);
 

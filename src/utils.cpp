@@ -92,3 +92,19 @@ float getFPS()
     // SDL_Log(fps.c_str());
     return fps_val;
 }
+
+Uint32 ColourToUint(int R, int G, int B) // https://gist.github.com/exsersewo/ac1b4ff4470a7f6b443cef34e26d72ad
+{
+	return (Uint32)((R << 16) + (G << 8) + (B << 0));
+}
+
+void fillPolygon(SDL_Renderer *renderer, std::vector<SDL_Point> points, SDL_Color fill_color)
+{
+    std::vector<Sint16> vx = {}, vy = {};
+    for (int i = 0; i < points.size(); i++)
+    {
+        vx.push_back(points[i].x);
+        vy.push_back(points[i].y);
+    }
+    filledPolygonRGBA(renderer, vx.data(), vy.data(), points.size(), fill_color.r, fill_color.g, fill_color.b, fill_color.a);
+}

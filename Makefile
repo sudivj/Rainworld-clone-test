@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -lSDL2main -lSDL2 -lSDL2_image -lSDL2_gfx -lm
+CXXFLAGS = -lyaml-cpp -lSDL2main -lSDL2 -lSDL2_image -lSDL2_gfx -lm -std=c++17
 
 SOURCESFOLDER = src
 

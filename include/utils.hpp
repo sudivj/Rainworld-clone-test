@@ -1,9 +1,15 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <sstream>
+#include <yaml-cpp/yaml.h>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
+
+#include "colors.hpp"
 
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
@@ -32,5 +38,7 @@ typedef struct Circle Circle;
 void setPixel(SDL_Renderer *renderer ,int x, int y, SDL_Color c);
 
 void Circle_draw(SDL_Renderer *renderer, Circle *circle);
+
+void fillPolygon(SDL_Renderer *renderer, std::vector<SDL_Point> points, SDL_Color fill_color);
 
 float getFPS();
